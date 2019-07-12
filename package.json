@@ -1,0 +1,19 @@
+{
+  "name": "grunt-contrib-processpy",
+  "version": "0.1.0",
+  "description": "Grunt's contribution to the processpy library",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andresg9108/grunt-contrib-processpy.git"
+  },
+  "author": "Andres Gonzalez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andresg9108/grunt-contrib-processpy/issues"
+  },
+  "homepage": "https://github.com/andresg9108/grunt-contrib-processpy#readme",
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "processpy": "^0.1.0"
+  }
+}

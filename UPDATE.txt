@@ -1,0 +1,10 @@
+Manual to move from version v0.1.1 to v0.1.2
+
+1- File: package.json
+* Update line ["processpy": "^0.1.1"]
+By ["processpy": "^0.1.2"]
+_____________________________
+
+2- Run "npm i" in the project root.
+
+Ok, updated project.

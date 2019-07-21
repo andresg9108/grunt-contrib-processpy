@@ -2,6 +2,9 @@
   "name": "grunt-contrib-processpy",
   "version": "0.2.0",
   "description": "Grunt's contribution to the processpy library",
+  "scripts": {
+    "html": "grunt process-html"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andresg9108/grunt-contrib-processpy.git"

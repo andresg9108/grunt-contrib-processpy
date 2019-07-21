@@ -13,4 +13,15 @@ module.exports = function(grunt) {
 		var done = this.async();
 		oProcessHtml.exec(done);
 	});
+
+	// SQL process
+	var oProcessSQL = require('./lib/process_sql.js').init(grunt);
+	grunt.registerTask('process-sql', 'Execute the "process.py -sql".',
+	function(){
+		var oConfig = grunt.config();
+		var aSQL = oConfig.processpy.sql;
+
+		var done = this.async();
+		oProcessSQL.exec(done, aSQL);
+	});
 };

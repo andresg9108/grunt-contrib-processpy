@@ -14,6 +14,6 @@
   "homepage": "https://github.com/andresg9108/grunt-contrib-processpy#readme",
   "devDependencies": {
     "grunt": "^1.0.4",
-    "processpy": "^0.2.0"
+    "processpy": "^0.2.1"
   }
 }

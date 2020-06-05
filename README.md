@@ -7,6 +7,7 @@
 1. [Introduction.](#Introduction "Introduction")
 2. [Dependencies.](#Dependencies "Dependencies")
 3. [The process html.](#TheProcessHtml "The process html")
+4. [The process sql.](#TheProcessSql "The process sql")
 
 <span id="Introduction"></span>
 ## Introduction ##
@@ -86,7 +87,7 @@ If all goes well, this command should create a couple of files and folders over 
 - "../pageTemplates": This folder contains the templates that each of the pages will use.
 - "../web": This folder contains the production files.
 
-You can run the command "grunt process-html" to update the production files manually, but one of the advantages of this project is that you can run "grunt" to listen to the project and that every time changes are saved to the files development, run the command automatically and to tell the program to stop listening, press Ctrl + C.
+You can run the command "grunt process-html" to update the production files manually, but one of the advantages of this project is that you can run "grunt" to listen to the project and that every time changes are saved to the files development, run the command automatically, and to tell the program to stop listening, press Ctrl + C.
 
 Now we can do a couple of tests to see how it works (remember to listen to the project with the "grunt" command). Open the file "../example/pageTemplates/index.html" and add the following lines:
 
@@ -104,7 +105,7 @@ Now we can do a couple of tests to see how it works (remember to listen to the p
 </html>
 ~~~
 
-As you can see we have common HTML tags except "<!-headHTML->" and "<!-bodyHTML->" which we will explain below. But first check the file "../example/web/index.html", if all goes well you will see the code copied from the template to the production file
+As you can see we have common HTML tags except "<!-headHTML->" and "<!-bodyHTML->" which we will explain below. But first check the file "../example/web/index.html", if all goes well you will see the code copied from the template to the production file.
 
 Now the tags "<!-headHTML->" and "<!-bodyHTML->" tell the template that the tags are in the files "../example/pages/head.html" and "../example/pages/body.html" and to be added respectively. Knowing this, we will modify the following files:
 
@@ -134,7 +135,7 @@ var aRoutePy = [
 ...
 ~~~
 
-See how the line "'./pages/page2/*'" was added to the array "aRoutePy", what this does is tell the program that every time a change is made to the folder "page2" the command is executed "grunt process-html" and we must do this every time we create a new folder in the path" "../example/pages/"*.
+See how the line "'./pages/page2/'" was added to the array "aRoutePy", what this does is tell the program that every time a change is made to the folder "page2" the command is executed "grunt process-html" and we must do this every time we create a new folder in the path" "../example/pages/".
 
 If we run "grunt process-html" again, two new files will be automatically created inside the new folder that we will modify next, let's not forget to run the command "grunt" again so that we don't have to do it manually.
 
@@ -156,7 +157,7 @@ If everything goes well you can check the production path "../example/web/", whe
 
 Last but not least, we will create a new template. In the path "../example/pageTemplates/" we will add a new file called "temp2.html", which will be a new template and will contain the following tags:
 
-File: ../example/pageTemplates/temp2.html
+**File: ../example/pageTemplates/temp2.html**
 
 ~~~
 <!DOCTYPE html>
@@ -172,7 +173,7 @@ File: ../example/pageTemplates/temp2.html
 </html>
 ~~~
 
-If you don't specify a template for each page you create, the program will default to being the template "../example/pageTemplates/index.html", but if you want the template "temp2.html" to be taken for page "page2" , the following should be added in the first line of the file "../example/pages/page2/head.html".
+If you don't specify a template for each page you create, the program will default to the template "../example/pageTemplates/index.html", but if you want it to take the template "temp2.html" for the page "page2", the following should be added in the first line of the file "../example/pages/page2/head.html".
 
 **File: ../example/pages/page2/head.html**
 
@@ -185,3 +186,11 @@ If you don't specify a template for each page you create, the program will defau
 ~~~
 
 See how the first line indicates "<!-Route: temp2.html->", which tells this page which template to use, which in this case is "temp2.html. If all goes well, we will have two pages using two different templates.
+
+Also, it is recommended to add the "Livereload" extension for "Google Chrome" or "Mozilla Firefox". This will instruct these browsers to refresh the page the moment they detect a change, but remember to listen to the project with the "grunt" command and activate "Livereload" in the browser you want.
+
+- [Extension for Google Chrome.](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=es "Extension for Google Chrome.")
+- [Extension for Mozilla Firefox.](https://addons.mozilla.org/es/firefox/addon/livereload-web-extension "Extension for Mozilla Firefox.")
+
+<span id="TheProcessSql"></span>
+## The process sql ##

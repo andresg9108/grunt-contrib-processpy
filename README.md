@@ -210,9 +210,6 @@ We will also add the following dependencies:
 - ***npm i processpy --save-dev***
 - ***npm i grunt-contrib-processpy --save-dev***
 
-- ***npm i matchdep --save-dev***
-- ***npm i grunt-contrib-watch --save-dev***
-
 We must also create the file "Gruntfile.js" inside the folder "example", which will contain the following lines.
 
 ~~~

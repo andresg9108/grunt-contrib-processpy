@@ -194,3 +194,46 @@ Also, it is recommended to add the "Livereload" extension for "Google Chrome" or
 
 <span id="TheProcessSql"></span>
 ## The process sql ##
+
+This command allows you to take all the ".sql" files in a folder and convert them into one file.
+
+We start creating a folder called "example" in the path you want for this example project, also a folder that we will call "sql" that will be in the path "../example/" and will contain the files you want with the extension " . sql ". 
+
+Then we will execute the following command using the console of your operating system and standing in the "example" folder, this creates a "package.json" file asking you for information such as the name of the project, etc.
+
+***npm init***
+
+We will also add the following dependencies:
+
+- ***npm i grunt -g***
+- ***npm i grunt --save-dev***
+- ***npm i processpy --save-dev***
+- ***npm i grunt-contrib-processpy --save-dev***
+
+- ***npm i matchdep --save-dev***
+- ***npm i grunt-contrib-watch --save-dev***
+
+We must also create the file "Gruntfile.js" inside the folder "example", which will contain the following lines.
+
+~~~
+module.exports = function(grunt) {
+  grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        
+        processpy: {
+            sql: [{
+                file: './myfile.sql', 
+                folder: './sql'
+            }]
+        }
+    });
+    
+  grunt.loadNpmTasks('grunt-contrib-processpy');
+};
+~~~
+
+We are now ready to run the following command:
+
+***grunt process-sql***
+
+If all goes well, you will have a file named "myfile.sql" in the path "../example/", which will contain all the lines of all the files that are in the "sql" folder.

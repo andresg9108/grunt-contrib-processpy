@@ -1,7 +1,12 @@
 {
   "name": "grunt-contrib-processpy",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Grunt's contribution to the processpy library",
+  "scripts": {
+    "html": "grunt process-html",
+    "sql": "grunt process-sql",
+    "rts": "grunt process-rts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andresg9108/grunt-contrib-processpy.git"
@@ -14,6 +19,6 @@
   "homepage": "https://github.com/andresg9108/grunt-contrib-processpy#readme",
   "dependencies": {
     "grunt": "^1.1.0",
-    "processpy": "^0.3.0"
+    "processpy": "^0.3.1"
   }
 }

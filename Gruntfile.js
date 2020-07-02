@@ -10,6 +10,11 @@ module.exports = function(grunt) {
             },{
                 file: 'E:/sql/test/test2.sql',
                 folder: 'E:/sql/test/sql2'
+            }],
+            rts: [{
+                folder: 'E:/proyectos/xampp/example',
+                search: 'd1',
+                replace: 'd2'
             }]
         }
     });

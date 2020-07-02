@@ -24,4 +24,15 @@ module.exports = function(grunt) {
 		var done = this.async();
 		oProcessSQL.exec(done, aSQL);
 	});
+
+	// RTS process
+	var oProcessRTS = require('./lib/process_rts.js').init(grunt);
+	grunt.registerTask('process-rts', 'Execute the "process.py -rts".',
+	function(){
+		var oConfig = grunt.config();
+		var aRts = oConfig.processpy.rts;
+
+		var done = this.async();
+		oProcessRTS.exec(done, aRts);
+	});
 };

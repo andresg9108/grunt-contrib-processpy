@@ -182,6 +182,10 @@ grunt process-html
 
 You can execute this command to update the production files manually, but one of the advantages of this project is that you can execute the following command so that every time a modification is detected in the routes that we put in the "aRoutePy" array, this executes the above command automatically.
 
+~~~
+grunt
+~~~
+
 It is important to remember that every time we add a new page within the "pages" directory we must also add this path in the "aRoutePy" array. In this way, if we want to add a new page called "page2" the array "aRoutePy" would look like this.
 
 ~~~
@@ -199,25 +203,12 @@ Also it is recommended to add the extension "Livereload" for "Google Chrome" or 
 - [Extension for Google Chrome.](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=es "Extension for Google Chrome.")
 - [Extension for Mozilla Firefox.](https://addons.mozilla.org/es/firefox/addon/livereload-web-extension "Extension for Mozilla Firefox.")
 
-***THE DOCUMENTATION IS BEING REVISED FROM HERE***
-
 <span id="TheProcessSql"></span>
 ## The process sql ##
 
 This command allows you to take all the ".sql" files in a folder and convert them into one file.
 
-We start creating a folder called "example" in the path you want for this example project, also a folder that we will call "sql" that will be in the path "../example/" and will contain the files you want with the extension " . sql ". 
-
-Then we will execute the following command using the console of your operating system and standing in the "example" folder, this creates a "package.json" file asking you for information such as the name of the project, etc.
-
-***npm init***
-
-We will also add the following dependencies:
-
-- ***npm i grunt -g***
-- ***npm i grunt --save-dev***
-- ***npm i processpy --save-dev***
-- ***npm i grunt-contrib-processpy --save-dev***
+***THE DOCUMENTATION IS BEING REVISED FROM HERE***
 
 We must also create the file "Gruntfile.js" inside the folder "example", which will contain the following lines.
 

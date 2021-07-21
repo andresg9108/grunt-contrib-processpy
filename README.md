@@ -6,41 +6,77 @@
 
 1. [Introduction.](#Introduction "Introduction")
 2. [Dependencies.](#Dependencies "Dependencies")
-3. [The process html.](#TheProcessHtml "The process html")
-4. [The process sql.](#TheProcessSql "The process sql")
+3. [Starting.](#Starting "Starting")
+4. [The process html.](#TheProcessHtml "The process html")
+5. [The process sql.](#TheProcessSql "The process sql")
+6. [Replace text string.](#ReplaceTextString "Replace text string")
 
 <span id="Introduction"></span>
 ## Introduction ##
 
-This project is Processpy's contribution to Grunt. Processpy aims to automate repetitive processes or patterns, using the great Python programming language.
+This project is Processpy's contribution to Grunt. Processpy aims to automate repetitive processes or patterns using the great Python programming language.
 
 [Processpy project repository](https://github.com/andresg9108/processpy "Processpy project repository")
 
 <span id="Dependencies"></span>
 ## Dependencies ##
 
-- Python (https://www.python.org): Download Python and add it to the path of your operating system.
 - Node.js (https://nodejs.org).
+- Python (https://www.python.org): Download Python and add it to the path of your operating system.
+- Execute "npm i grunt -g" on the console of your operating system.
+
+<span id="Starting"></span>
+## Starting ##
+
+We will start by executing the following command using the console of your operating system and on the folder that we want to use for our project, this creates a "package.json" file asking for information such as the name of the project, etc, etc.
+
+~~~
+npm init
+~~~
+
+We will also add the following dependencies using the following commands on the same directory.
+
+~~~
+npm i grunt --save-dev
+npm i matchdep --save-dev
+npm i grunt-contrib-watch --save-dev
+npm i grunt-contrib-processpy --save-dev
+~~~
+
+We must also create the file "Gruntfile.js" on the same directory that will contain the following lines.
+
+~~~
+module.exports = function(grunt) {
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+
+    watch: {
+      files: ['*.*'],
+      options: {
+        nospawn: true,
+        livereload: {
+          host: 'localhost',
+          port: 35729
+        }
+      }
+    }
+  });
+
+  grunt.registerTask('default', ['watch']);
+  grunt.loadNpmTasks('grunt-contrib-processpy');
+};
+~~~
+
+With this we have our project ready to work with "grunt-contrib-processpy".
 
 <span id="TheProcessHtml"></span>
 ## The process html ##
 
+***THE DOCUMENTATION IS BEING REVISED FROM HERE***
+
 This command will allow you to create HTML files from others files.
-
-We will start by creating a folder called "example" in the path you want for this example project. Then we will execute the following command using the console of your operating system and standing in the "example" folder, this creates a "package.json" file asking you for information such as the name of the project, etc.
-
-***npm init***
-
-We will also add the following dependencies:
-
-- ***npm i grunt -g***
-- ***npm i grunt --save-dev***
-- ***npm i matchdep --save-dev***
-- ***npm i processpy --save-dev***
-- ***npm i grunt-contrib-watch --save-dev***
-- ***npm i grunt-contrib-processpy --save-dev***
-
-We must also create the file "Gruntfile.js" inside the folder "example", which will contain the following lines.
 
 ~~~
 module.exports = function(grunt) {
@@ -234,3 +270,6 @@ We are now ready to run the following command:
 ***grunt process-sql***
 
 If all goes well, you will have a file named "myfile.sql" in the path "../example/", which will contain all the lines of all the files that are in the "sql" folder.
+
+<span id="ReplaceTextString"></span>
+## Replace text string ##

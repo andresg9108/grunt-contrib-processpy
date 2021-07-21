@@ -45,6 +45,8 @@ npm i grunt-contrib-processpy --save-dev
 
 We must also create the file "Gruntfile.js" on the same directory that will contain the following lines.
 
+**File: ./Gruntfile.js**
+
 ~~~
 module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
@@ -74,159 +76,130 @@ With this we have our project ready to work with "grunt-contrib-processpy".
 <span id="TheProcessHtml"></span>
 ## The process html ##
 
-***THE DOCUMENTATION IS BEING REVISED FROM HERE***
-
 This command will allow you to create HTML files from others files.
 
-~~~
-module.exports = function(grunt) {
-
-    var aRoutePy = [
-        './pages/*',
-        './pageTemplates/*'
-    ];
-
-    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-
-        watch: {
-            files: ['*.*'],
-            options: {
-                nospawn: true,
-                livereload: {
-                    host: 'localhost',
-                    port: 35729
-                }
-            },
-            task_py: {
-                files: aRoutePy,
-                tasks: ['process-html']
-            }
-        }
-        
-    });
-
-    grunt.registerTask('default', ['watch']);
-    grunt.loadNpmTasks('grunt-contrib-processpy');
-};
-~~~
-
-We are now ready to run the following command:
-
-***grunt process-html***
-
-If all goes well, this command should create a couple of files and folders over the current folder (example). Additionally we must create the folder "pageTemplates" inside "example" and a file "index.html" inside "pageTemplates". With this we already have the entire structure which is explained below.
-
-- "../pages": This folder contains the files that correspond to each page.
-- "../pageTemplates": This folder contains the templates that each of the pages will use.
-- "../web": This folder contains the production files.
-
-You can run the command "grunt process-html" to update the production files manually, but one of the advantages of this project is that you can run "grunt" to listen to the project and that every time changes are saved to the files development, run the command automatically, and to tell the program to stop listening, press Ctrl + C.
-
-Now we can do a couple of tests to see how it works (remember to listen to the project with the "grunt" command). Open the file "../example/pageTemplates/index.html" and add the following lines:
-
-**File: ../example/pageTemplates/index.html**
-
-~~~
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!--headHTML-->
-  </head>
-  <body>
-    <!--bodyHTML-->
-  </body>
-</html>
-~~~
-
-As you can see we have common HTML tags except "<!-headHTML->" and "<!-bodyHTML->" which we will explain below. But first check the file "../example/web/index.html", if all goes well you will see the code copied from the template to the production file.
-
-Now the tags "<!-headHTML->" and "<!-bodyHTML->" tell the template that the tags are in the files "../example/pages/head.html" and "../example/pages/body.html" and to be added respectively. Knowing this, we will modify the following files:
-
-**File: ../example/pages/head.html**
-
-~~~
-<title>My Page</title>
-~~~
-
-**File: ../example/pages/body.html**
-
-~~~
-<h1>Hello World!!!</h1>
-~~~
-
-If all goes well, the changes will be detected in the production file "../example/web/index.html".
-
-With all of the above, we already know how this command works in general. Now we are going to create a new folder called "page2" in the directory "../example/pages/", for this we will stop "grunt" in the console using Ctrl+C and proceed to create the above mentioned folder and modify the file "../example/Gruntfile.js", adding a new line to the array "aRoutePy" like so:
+We will start by modifying the "Gruntfile.js" file, adding the following lines that create an array called "aRoutePy" that will contain the routes of the pages of our project.
 
 ~~~
 ...
 var aRoutePy = [
-    './pages/*',
-    './pageTemplates/*',
-    './pages/page2/*'
+  './pages/*',
+  './pageTemplates/*'
 ];
 ...
 ~~~
 
-See how the line "'./pages/page2/'" was added to the array "aRoutePy", what this does is tell the program that every time a change is made to the folder "page2" the command is executed "grunt process-html" and we must do this every time we create a new folder in the path" "../example/pages/".
+So our "Gruntfile.js" file would look like this.
 
-If we run "grunt process-html" again, two new files will be automatically created inside the new folder that we will modify next, let's not forget to run the command "grunt" again so that we don't have to do it manually.
-
-**File: ../example/pages/page2/head.html**
+**File: ./Gruntfile.js**
 
 ~~~
-<title>This is my page number 2.</title>
-<script>
-	console.log('Hello World!!!');
-</script>
+module.exports = function(grunt) {
+  
+  var aRoutePy = [
+    './pages/*',
+    './pageTemplates/*'
+  ];
+
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+
+    watch: {
+      files: ['*.*'],
+      options: {
+        nospawn: true,
+        livereload: {
+          host: 'localhost',
+          port: 35729
+        }
+      }
+    }
+  });
+
+  grunt.registerTask('default', ['watch']);
+  grunt.loadNpmTasks('grunt-contrib-processpy');
+};
 ~~~
 
-**File: ../example/pages/page2/body.html**
-~~~
-<h1>Hello, this is my page number 2.</h1>
-~~~
-
-If everything goes well you can check the production path "../example/web/", where you can now find two pages with different contents.
-
-Last but not least, we will create a new template. In the path "../example/pageTemplates/" we will add a new file called "temp2.html", which will be a new template and will contain the following tags:
-
-**File: ../example/pageTemplates/temp2.html**
+We will also add a new task called "task_py" that includes the previously created array, this will be done with the following lines.
 
 ~~~
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!--headHTML-->
-  </head>
-  <body>
-  	<div style="background-color: blue; color: white;">
-  		<!--bodyHTML-->
-  	</div>
-  </body>
-</html>
+...
+task_py: {
+  files: aRoutePy,
+  tasks: ['process-html']
+}
+...
 ~~~
 
-If you don't specify a template for each page you create, the program will default to the template "../example/pageTemplates/index.html", but if you want it to take the template "temp2.html" for the page "page2", the following should be added in the first line of the file "../example/pages/page2/head.html".
+So our "Gruntfile.js" file would look like this.
 
-**File: ../example/pages/page2/head.html**
+**File: ./Gruntfile.js**
 
 ~~~
-<!--Route: temp2.html-->
-<title>This is my page number 2.</title>
-<script>
-	console.log('Hello World!!!');
-</script>
+module.exports = function(grunt) {
+  
+  var aRoutePy = [
+    './pages/*',
+    './pageTemplates/*'
+  ];
+
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+
+    watch: {
+      files: ['*.*'],
+      options: {
+        nospawn: true,
+        livereload: {
+          host: 'localhost',
+          port: 35729
+        }
+      },
+      task_py: {
+        files: aRoutePy,
+        tasks: ['process-html']
+      }
+    }
+  });
+
+  grunt.registerTask('default', ['watch']);
+  grunt.loadNpmTasks('grunt-contrib-processpy');
+};
 ~~~
 
-See how the first line indicates "<!-Route: temp2.html->", which tells this page which template to use, which in this case is "temp2.html. If all goes well, we will have two pages using two different templates.
+Running the following command is equivalent to running processpy command #1. If you don't know what this command does, go to the following link that explains the html process of processpy very well.
 
-Also, it is recommended to add the "Livereload" extension for "Google Chrome" or "Mozilla Firefox". This will instruct these browsers to refresh the page the moment they detect a change, but remember to listen to the project with the "grunt" command and activate "Livereload" in the browser you want.
+~~~
+grunt process-html
+~~~
+
+[Documentation of the html process](https://github.com/andresg9108/processpy/#TheProcessHtml "Documentation of the html process")
+
+You can execute this command to update the production files manually, but one of the advantages of this project is that you can execute the following command so that every time a modification is detected in the routes that we put in the "aRoutePy" array, this executes the above command automatically.
+
+It is important to remember that every time we add a new page within the "pages" directory we must also add this path in the "aRoutePy" array. In this way, if we want to add a new page called "page2" the array "aRoutePy" would look like this.
+
+~~~
+...
+var aRoutePy = [
+  './pages/*',
+  './pageTemplates/*',
+  './pages/page2/*'
+];
+...
+~~~
+
+Also it is recommended to add the extension "Livereload" for "Google Chrome" or "Mozilla Firefox". This will tell these browsers to refresh the page the moment they detect a change, but always remember to run the "grunt" command and activate "Livereload" in your browser.
 
 - [Extension for Google Chrome.](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=es "Extension for Google Chrome.")
 - [Extension for Mozilla Firefox.](https://addons.mozilla.org/es/firefox/addon/livereload-web-extension "Extension for Mozilla Firefox.")
+
+***THE DOCUMENTATION IS BEING REVISED FROM HERE***
 
 <span id="TheProcessSql"></span>
 ## The process sql ##

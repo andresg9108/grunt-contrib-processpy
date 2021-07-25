@@ -52,22 +52,8 @@ module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-
-    watch: {
-      files: ['*.*'],
-      options: {
-        nospawn: true,
-        livereload: {
-          host: 'localhost',
-          port: 35729
-        }
-      }
-    }
+    pkg: grunt.file.readJSON('package.json')
   });
-
-  grunt.registerTask('default', ['watch']);
-  grunt.loadNpmTasks('grunt-contrib-processpy');
 };
 ~~~
 
@@ -78,7 +64,7 @@ With this we have our project ready to work with "grunt-contrib-processpy".
 
 This command will allow you to create HTML files from others files.
 
-We will start by modifying the "Gruntfile.js" file, adding the following lines that create an array called "aRoutePy" that will contain the routes of the pages of our project.
+We will start by modifying the "Gruntfile.js" file adding the following lines that create an array called "aRoutePy" that will contain the routes of the pages of our project.
 
 ~~~
 ...
@@ -95,42 +81,45 @@ So our "Gruntfile.js" file would look like this.
 
 ~~~
 module.exports = function(grunt) {
-  
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
   var aRoutePy = [
     './pages/*',
     './pageTemplates/*'
   ];
 
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-
-    watch: {
-      files: ['*.*'],
-      options: {
-        nospawn: true,
-        livereload: {
-          host: 'localhost',
-          port: 35729
-        }
-      }
-    }
+    pkg: grunt.file.readJSON('package.json')
   });
-
-  grunt.registerTask('default', ['watch']);
-  grunt.loadNpmTasks('grunt-contrib-processpy');
 };
 ~~~
 
-We will also add a new task called "task_py" that includes the previously created array, this will be done with the following lines.
+We will also add a new task called "watch" that will contain the tasks that will be executed automatically as "task_py" and that includes the previously created arrangement, this will be done with the following lines.
 
 ~~~
 ...
-task_py: {
-  files: aRoutePy,
-  tasks: ['process-html']
+watch: {
+  files: ['*.*'],
+  options: {
+    nospawn: true,
+    livereload: {
+      host: 'localhost',
+      port: 35729
+    }
+  },
+  task_py: {
+    files: aRoutePy,
+    tasks: ['process-html']
+  }
 }
+...
+~~~
+
+And finally we will add the default grunt task using the following line.
+
+~~~
+...
+grunt.registerTask('default', ['watch']);
 ...
 ~~~
 
@@ -140,17 +129,15 @@ So our "Gruntfile.js" file would look like this.
 
 ~~~
 module.exports = function(grunt) {
-  
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
   var aRoutePy = [
     './pages/*',
     './pageTemplates/*'
   ];
 
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
     watch: {
       files: ['*.*'],
       options: {
@@ -168,7 +155,6 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', ['watch']);
-  grunt.loadNpmTasks('grunt-contrib-processpy');
 };
 ~~~
 
@@ -224,8 +210,6 @@ module.exports = function(grunt) {
             }]
         }
     });
-    
-  grunt.loadNpmTasks('grunt-contrib-processpy');
 };
 ~~~
 

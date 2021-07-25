@@ -244,7 +244,53 @@ Running the following command is equivalent to running processpy command #2.
 grunt process-sql
 ~~~
 
-***THE DOCUMENTATION IS BEING REVISED FROM HERE***
-
 <span id="ReplaceTextString"></span>
 ## Replace text string ##
+
+This command will allow you to replace a text string in all files in a directory.
+
+It is important to understand how the "replace text string" of processpy  works to understand what is explained next.
+
+[Documentation of replace text string](https://github.com/andresg9108/processpy#ReplaceTextString "Documentation of replace text string")
+
+We will start modifying the file "Gruntfile.js" adding the following lines that create a task called "processpy" that contains a task called "rts", it receives an array that contains json objects with the parameter "folder" which is the directory that contains the files that we want to modify, "search" which is the text string we want to modify and "replace" which is the new text string that will be added where the previous one was.
+
+~~~
+...
+processpy: {
+  rts: [{
+    folder: './data',
+    search: 'Old string',
+    replace: 'New string'
+  }]
+}
+...
+~~~
+
+So our "Gruntfile.js" file would look like this.
+
+**File: ./Gruntfile.js**
+
+~~~
+module.exports = function(grunt) {
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+
+    processpy: {
+      rts: [{
+        folder: './data',
+        search: 'Old string',
+        replace: 'New string'
+      }]
+    }
+  });
+};
+~~~
+
+Running the following command is equivalent to running processpy command #3.
+
+~~~
+grunt process-rts
+~~~

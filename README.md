@@ -43,6 +43,12 @@ npm i grunt-contrib-watch --save-dev
 npm i grunt-contrib-processpy --save-dev
 ~~~
 
+Or you can also use the following command which installs all these dependencies.
+
+~~~
+npm i grunt matchdep grunt-contrib-watch grunt-contrib-processpy --save-dev
+~~~
+
 We must also create the file "Gruntfile.js" on the same directory that will contain the following lines.
 
 **File: ./Gruntfile.js**
@@ -194,30 +200,51 @@ Also it is recommended to add the extension "Livereload" for "Google Chrome" or 
 
 This command allows you to take all the ".sql" files in a folder and convert them into one file.
 
-***THE DOCUMENTATION IS BEING REVISED FROM HERE***
+It is important to understand how the process sql of processpy  works to understand what is explained next.
 
-We must also create the file "Gruntfile.js" inside the folder "example", which will contain the following lines.
+[Documentation of the sql process](https://github.com/andresg9108/processpy#TheProcessSql "Documentation of the sql process")
+
+We will start by modifying the file "Gruntfile.js" adding the following lines that create a task called "processpy" that contains a task called "sql", it receives an array containing json objects with the parameter "file" which is the final file that it contains all the lines of the other files and the "folder" which is the path of the ".sql" files.
+
+~~~
+...
+processpy: {
+  sql: [{
+    file: './myfile.sql', 
+    folder: './sql'
+  }]
+}
+...
+~~~
+
+So our "Gruntfile.js" file would look like this.
+
+**File: ./Gruntfile.js**
 
 ~~~
 module.exports = function(grunt) {
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
   grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        
-        processpy: {
-            sql: [{
-                file: './myfile.sql', 
-                folder: './sql'
-            }]
-        }
-    });
+    pkg: grunt.file.readJSON('package.json'),
+
+    processpy: {
+      sql: [{
+        file: './myfile.sql', 
+        folder: './sql'
+      }]
+    }
+  });
 };
 ~~~
 
-We are now ready to run the following command:
+Running the following command is equivalent to running processpy command #2.
 
-***grunt process-sql***
+~~~
+grunt process-sql
+~~~
 
-If all goes well, you will have a file named "myfile.sql" in the path "../example/", which will contain all the lines of all the files that are in the "sql" folder.
+***THE DOCUMENTATION IS BEING REVISED FROM HERE***
 
 <span id="ReplaceTextString"></span>
 ## Replace text string ##

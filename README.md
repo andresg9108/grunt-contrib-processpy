@@ -6,188 +6,191 @@
 
 1. [Introduction.](#Introduction "Introduction")
 2. [Dependencies.](#Dependencies "Dependencies")
-3. [The process html.](#TheProcessHtml "The process html")
-4. [The process sql.](#TheProcessSql "The process sql")
+3. [Starting.](#Starting "Starting")
+4. [The process html.](#TheProcessHtml "The process html")
+5. [The process sql.](#TheProcessSql "The process sql")
+6. [Replace text string.](#ReplaceTextString "Replace text string")
 
 <span id="Introduction"></span>
 ## Introduction ##
 
-This project is Processpy's contribution to Grunt. Processpy aims to automate repetitive processes or patterns, using the great Python programming language.
+This project is Processpy's contribution to Grunt. Processpy aims to automate repetitive processes or patterns using the great Python programming language.
 
 [Processpy project repository](https://github.com/andresg9108/processpy "Processpy project repository")
 
 <span id="Dependencies"></span>
 ## Dependencies ##
 
-- Python (https://www.python.org): Download Python and add it to the path of your operating system.
 - Node.js (https://nodejs.org).
+- Python (https://www.python.org): Download Python and add it to the path of your operating system.
+- Execute "npm i grunt -g" on the console of your operating system.
+
+<span id="Starting"></span>
+## Starting ##
+
+We will start by executing the following command using the console of your operating system and on the folder that we want to use for our project, this creates a "package.json" file asking for information such as the name of the project, etc, etc.
+
+~~~
+npm init
+~~~
+
+We will also add the following dependencies using the following commands on the same directory.
+
+~~~
+npm i grunt --save-dev
+npm i matchdep --save-dev
+npm i grunt-contrib-watch --save-dev
+npm i grunt-contrib-processpy --save-dev
+~~~
+
+Or you can also use the following command which installs all these dependencies.
+
+~~~
+npm i grunt matchdep grunt-contrib-watch grunt-contrib-processpy --save-dev
+~~~
+
+We must also create the file "Gruntfile.js" on the same directory that will contain the following lines.
+
+**File: ./Gruntfile.js**
+
+~~~
+module.exports = function(grunt) {
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json')
+  });
+};
+~~~
+
+With this we have our project ready to work with "grunt-contrib-processpy".
 
 <span id="TheProcessHtml"></span>
 ## The process html ##
 
 This command will allow you to create HTML files from others files.
 
-We will start by creating a folder called "example" in the path you want for this example project. Then we will execute the following command using the console of your operating system and standing in the "example" folder, this creates a "package.json" file asking you for information such as the name of the project, etc.
-
-***npm init***
-
-We will also add the following dependencies:
-
-- ***npm i grunt -g***
-- ***npm i grunt --save-dev***
-- ***npm i matchdep --save-dev***
-- ***npm i processpy --save-dev***
-- ***npm i grunt-contrib-watch --save-dev***
-- ***npm i grunt-contrib-processpy --save-dev***
-
-We must also create the file "Gruntfile.js" inside the folder "example", which will contain the following lines.
-
-~~~
-module.exports = function(grunt) {
-
-    var aRoutePy = [
-        './pages/*',
-        './pageTemplates/*'
-    ];
-
-    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-
-        watch: {
-            files: ['*.*'],
-            options: {
-                nospawn: true,
-                livereload: {
-                    host: 'localhost',
-                    port: 35729
-                }
-            },
-            task_py: {
-                files: aRoutePy,
-                tasks: ['process-html']
-            }
-        }
-        
-    });
-
-    grunt.registerTask('default', ['watch']);
-    grunt.loadNpmTasks('grunt-contrib-processpy');
-};
-~~~
-
-We are now ready to run the following command:
-
-***grunt process-html***
-
-If all goes well, this command should create a couple of files and folders over the current folder (example). Additionally we must create the folder "pageTemplates" inside "example" and a file "index.html" inside "pageTemplates". With this we already have the entire structure which is explained below.
-
-- "../pages": This folder contains the files that correspond to each page.
-- "../pageTemplates": This folder contains the templates that each of the pages will use.
-- "../web": This folder contains the production files.
-
-You can run the command "grunt process-html" to update the production files manually, but one of the advantages of this project is that you can run "grunt" to listen to the project and that every time changes are saved to the files development, run the command automatically, and to tell the program to stop listening, press Ctrl + C.
-
-Now we can do a couple of tests to see how it works (remember to listen to the project with the "grunt" command). Open the file "../example/pageTemplates/index.html" and add the following lines:
-
-**File: ../example/pageTemplates/index.html**
-
-~~~
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!--headHTML-->
-  </head>
-  <body>
-    <!--bodyHTML-->
-  </body>
-</html>
-~~~
-
-As you can see we have common HTML tags except "<!-headHTML->" and "<!-bodyHTML->" which we will explain below. But first check the file "../example/web/index.html", if all goes well you will see the code copied from the template to the production file.
-
-Now the tags "<!-headHTML->" and "<!-bodyHTML->" tell the template that the tags are in the files "../example/pages/head.html" and "../example/pages/body.html" and to be added respectively. Knowing this, we will modify the following files:
-
-**File: ../example/pages/head.html**
-
-~~~
-<title>My Page</title>
-~~~
-
-**File: ../example/pages/body.html**
-
-~~~
-<h1>Hello World!!!</h1>
-~~~
-
-If all goes well, the changes will be detected in the production file "../example/web/index.html".
-
-With all of the above, we already know how this command works in general. Now we are going to create a new folder called "page2" in the directory "../example/pages/", for this we will stop "grunt" in the console using Ctrl+C and proceed to create the above mentioned folder and modify the file "../example/Gruntfile.js", adding a new line to the array "aRoutePy" like so:
+We will start by modifying the "Gruntfile.js" file adding the following lines that create an array called "aRoutePy" that will contain the routes of the pages of our project.
 
 ~~~
 ...
 var aRoutePy = [
-    './pages/*',
-    './pageTemplates/*',
-    './pages/page2/*'
+  './pages/*',
+  './pageTemplates/*'
 ];
 ...
 ~~~
 
-See how the line "'./pages/page2/'" was added to the array "aRoutePy", what this does is tell the program that every time a change is made to the folder "page2" the command is executed "grunt process-html" and we must do this every time we create a new folder in the path" "../example/pages/".
+So our "Gruntfile.js" file would look like this.
 
-If we run "grunt process-html" again, two new files will be automatically created inside the new folder that we will modify next, let's not forget to run the command "grunt" again so that we don't have to do it manually.
-
-**File: ../example/pages/page2/head.html**
+**File: ./Gruntfile.js**
 
 ~~~
-<title>This is my page number 2.</title>
-<script>
-	console.log('Hello World!!!');
-</script>
+module.exports = function(grunt) {
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  var aRoutePy = [
+    './pages/*',
+    './pageTemplates/*'
+  ];
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json')
+  });
+};
 ~~~
 
-**File: ../example/pages/page2/body.html**
-~~~
-<h1>Hello, this is my page number 2.</h1>
-~~~
-
-If everything goes well you can check the production path "../example/web/", where you can now find two pages with different contents.
-
-Last but not least, we will create a new template. In the path "../example/pageTemplates/" we will add a new file called "temp2.html", which will be a new template and will contain the following tags:
-
-**File: ../example/pageTemplates/temp2.html**
+We will also add a new task called "watch" that will contain the tasks that will be executed automatically as "task_py" and that includes the previously created arrangement, this will be done with the following lines.
 
 ~~~
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!--headHTML-->
-  </head>
-  <body>
-  	<div style="background-color: blue; color: white;">
-  		<!--bodyHTML-->
-  	</div>
-  </body>
-</html>
+...
+watch: {
+  files: ['*.*'],
+  options: {
+    nospawn: true,
+    livereload: {
+      host: 'localhost',
+      port: 35729
+    }
+  },
+  task_py: {
+    files: aRoutePy,
+    tasks: ['process-html']
+  }
+}
+...
 ~~~
 
-If you don't specify a template for each page you create, the program will default to the template "../example/pageTemplates/index.html", but if you want it to take the template "temp2.html" for the page "page2", the following should be added in the first line of the file "../example/pages/page2/head.html".
-
-**File: ../example/pages/page2/head.html**
+And finally we will add the default grunt task using the following line.
 
 ~~~
-<!--Route: temp2.html-->
-<title>This is my page number 2.</title>
-<script>
-	console.log('Hello World!!!');
-</script>
+...
+grunt.registerTask('default', ['watch']);
+...
 ~~~
 
-See how the first line indicates "<!-Route: temp2.html->", which tells this page which template to use, which in this case is "temp2.html. If all goes well, we will have two pages using two different templates.
+So our "Gruntfile.js" file would look like this.
 
-Also, it is recommended to add the "Livereload" extension for "Google Chrome" or "Mozilla Firefox". This will instruct these browsers to refresh the page the moment they detect a change, but remember to listen to the project with the "grunt" command and activate "Livereload" in the browser you want.
+**File: ./Gruntfile.js**
+
+~~~
+module.exports = function(grunt) {
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  var aRoutePy = [
+    './pages/*',
+    './pageTemplates/*'
+  ];
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    watch: {
+      files: ['*.*'],
+      options: {
+        nospawn: true,
+        livereload: {
+          host: 'localhost',
+          port: 35729
+        }
+      },
+      task_py: {
+        files: aRoutePy,
+        tasks: ['process-html']
+      }
+    }
+  });
+
+  grunt.registerTask('default', ['watch']);
+};
+~~~
+
+Running the following command is equivalent to running processpy command #1. If you don't know what this command does, go to the following link that explains the html process of processpy very well.
+
+~~~
+grunt process-html
+~~~
+
+[Documentation of the html process](https://github.com/andresg9108/processpy/#TheProcessHtml "Documentation of the html process")
+
+You can execute this command to update the production files manually, but one of the advantages of this project is that you can execute the following command so that every time a modification is detected in the routes that we put in the "aRoutePy" array, this executes the above command automatically.
+
+~~~
+grunt
+~~~
+
+It is important to remember that every time we add a new page within the "pages" directory we must also add this path in the "aRoutePy" array. In this way, if we want to add a new page called "page2" the array "aRoutePy" would look like this.
+
+~~~
+...
+var aRoutePy = [
+  './pages/*',
+  './pageTemplates/*',
+  './pages/page2/*'
+];
+...
+~~~
+
+Also it is recommended to add the extension "Livereload" for "Google Chrome" or "Mozilla Firefox". This will tell these browsers to refresh the page the moment they detect a change, but always remember to run the "grunt" command and activate "Livereload" in your browser.
 
 - [Extension for Google Chrome.](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=es "Extension for Google Chrome.")
 - [Extension for Mozilla Firefox.](https://addons.mozilla.org/es/firefox/addon/livereload-web-extension "Extension for Mozilla Firefox.")
@@ -197,40 +200,97 @@ Also, it is recommended to add the "Livereload" extension for "Google Chrome" or
 
 This command allows you to take all the ".sql" files in a folder and convert them into one file.
 
-We start creating a folder called "example" in the path you want for this example project, also a folder that we will call "sql" that will be in the path "../example/" and will contain the files you want with the extension " . sql ". 
+It is important to understand how the process sql of processpy  works to understand what is explained next.
 
-Then we will execute the following command using the console of your operating system and standing in the "example" folder, this creates a "package.json" file asking you for information such as the name of the project, etc.
+[Documentation of the sql process](https://github.com/andresg9108/processpy#TheProcessSql "Documentation of the sql process")
 
-***npm init***
+We will start by modifying the file "Gruntfile.js" adding the following lines that create a task called "processpy" that contains a task called "sql", it receives an array containing json objects with the parameter "file" which is the final file that it contains all the lines of the other files and the "folder" which is the path of the ".sql" files.
 
-We will also add the following dependencies:
+~~~
+...
+processpy: {
+  sql: [{
+    file: './myfile.sql', 
+    folder: './sql'
+  }]
+}
+...
+~~~
 
-- ***npm i grunt -g***
-- ***npm i grunt --save-dev***
-- ***npm i processpy --save-dev***
-- ***npm i grunt-contrib-processpy --save-dev***
+So our "Gruntfile.js" file would look like this.
 
-We must also create the file "Gruntfile.js" inside the folder "example", which will contain the following lines.
+**File: ./Gruntfile.js**
 
 ~~~
 module.exports = function(grunt) {
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
   grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        
-        processpy: {
-            sql: [{
-                file: './myfile.sql', 
-                folder: './sql'
-            }]
-        }
-    });
-    
-  grunt.loadNpmTasks('grunt-contrib-processpy');
+    pkg: grunt.file.readJSON('package.json'),
+
+    processpy: {
+      sql: [{
+        file: './myfile.sql', 
+        folder: './sql'
+      }]
+    }
+  });
 };
 ~~~
 
-We are now ready to run the following command:
+Running the following command is equivalent to running processpy command #2.
 
-***grunt process-sql***
+~~~
+grunt process-sql
+~~~
 
-If all goes well, you will have a file named "myfile.sql" in the path "../example/", which will contain all the lines of all the files that are in the "sql" folder.
+<span id="ReplaceTextString"></span>
+## Replace text string ##
+
+This command will allow you to replace a text string in all files in a directory.
+
+It is important to understand how the "replace text string" of processpy  works to understand what is explained next.
+
+[Documentation of replace text string](https://github.com/andresg9108/processpy#ReplaceTextString "Documentation of replace text string")
+
+We will start modifying the file "Gruntfile.js" adding the following lines that create a task called "processpy" that contains a task called "rts", it receives an array that contains json objects with the parameter "folder" which is the directory that contains the files that we want to modify, "search" which is the text string we want to modify and "replace" which is the new text string that will be added where the previous one was.
+
+~~~
+...
+processpy: {
+  rts: [{
+    folder: './data',
+    search: 'Old string',
+    replace: 'New string'
+  }]
+}
+...
+~~~
+
+So our "Gruntfile.js" file would look like this.
+
+**File: ./Gruntfile.js**
+
+~~~
+module.exports = function(grunt) {
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+
+    processpy: {
+      rts: [{
+        folder: './data',
+        search: 'Old string',
+        replace: 'New string'
+      }]
+    }
+  });
+};
+~~~
+
+Running the following command is equivalent to running processpy command #3.
+
+~~~
+grunt process-rts
+~~~

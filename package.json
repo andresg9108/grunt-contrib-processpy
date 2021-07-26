@@ -1,7 +1,7 @@
 {
   "name": "grunt-contrib-processpy",
   "version": "0.3.2",
-  "description": "Grunt's contribution to the processpy library",
+  "description": "This project is Processpy's contribution to Grunt. Processpy aims to automate repetitive processes or patterns using the great Python programming language.",
   "scripts": {
     "html": "grunt process-html",
     "sql": "grunt process-sql",

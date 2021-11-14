@@ -4,29 +4,28 @@
 
 ## Content ##
 
+***THE DOCUMENTATION IS BEING REVIEWED FROM HERE***
+
 1. [Introduction.](#Introduction "Introduction")
 2. [Dependencies.](#Dependencies "Dependencies")
-3. [Starting.](#Starting "Starting")
+3. [Getting started.](#GettingStarted "Getting started")
 4. [The process html.](#TheProcessHtml "The process html")
 5. [The process sql.](#TheProcessSql "The process sql")
 6. [Replace text string.](#ReplaceTextString "Replace text string")
 
-<span id="Introduction"></span>
-## Introduction ##
+## Introduction <span name="Introduction"></span> ##
 
 This project is Processpy's contribution to Grunt. Processpy aims to automate repetitive processes or patterns using the great Python programming language.
 
 [Processpy project repository](https://github.com/andresg9108/processpy "Processpy project repository")
 
-<span id="Dependencies"></span>
-## Dependencies ##
+## Dependencies <span name="Dependencies"></span> ##
 
 - Node.js (https://nodejs.org).
 - Python (https://www.python.org): Download Python and add it to the path of your operating system.
 - Execute "npm i grunt -g" on the console of your operating system.
 
-<span id="Starting"></span>
-## Starting ##
+## Getting started <span name="GettingStarted"></span> ##
 
 We will start by executing the following command using the console of your operating system and on the folder that we want to use for our project, this creates a "package.json" file asking for information such as the name of the project, etc, etc.
 
@@ -65,8 +64,7 @@ module.exports = function(grunt) {
 
 With this we have our project ready to work with "grunt-contrib-processpy".
 
-<span id="TheProcessHtml"></span>
-## The process html ##
+## The process html <span name="TheProcessHtml"></span> ##
 
 This command will allow you to create HTML files from others files.
 
@@ -195,8 +193,7 @@ Also it is recommended to add the extension "Livereload" for "Google Chrome" or 
 - [Extension for Google Chrome.](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=es "Extension for Google Chrome.")
 - [Extension for Mozilla Firefox.](https://addons.mozilla.org/es/firefox/addon/livereload-web-extension "Extension for Mozilla Firefox.")
 
-<span id="TheProcessSql"></span>
-## The process sql ##
+## The process sql <span name="TheProcessSql"></span> ##
 
 This command allows you to take all the ".sql" files in a folder and convert them into one file.
 
@@ -244,8 +241,7 @@ Running the following command is equivalent to running processpy command #2.
 grunt process-sql
 ~~~
 
-<span id="ReplaceTextString"></span>
-## Replace text string ##
+## Replace text string <span name="ReplaceTextString"></span> ##
 
 This command will allow you to replace a text string in all files in a directory.
 

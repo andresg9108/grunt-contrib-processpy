@@ -4,8 +4,6 @@
 
 ## Content ##
 
-***THE DOCUMENTATION IS BEING REVIEWED FROM HERE***
-
 1. [Introduction.](#Introduction "Introduction")
 2. [Dependencies.](#Dependencies "Dependencies")
 3. [Getting started.](#GettingStarted "Getting started")
@@ -23,7 +21,8 @@ This project is Processpy's contribution to Grunt. Processpy aims to automate re
 
 - Node.js (https://nodejs.org).
 - Python (https://www.python.org): Download Python and add it to the path of your operating system.
-- Execute "npm i grunt -g" on the console of your operating system.
+
+***THE DOCUMENTATION IS BEING REVIEWED FROM HERE***
 
 ## Getting started <span name="GettingStarted"></span> ##
 

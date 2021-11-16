@@ -34,11 +34,13 @@ Now we will modify the "package.json" file by changing all the content of the "s
 
 **File: ./package.json**
 
-```js
+```json
+...
 "scripts": {
   "start": "grunt",
   "html": "grunt process-html"
 },
+...
 ```
 
 We will also add the following dependencies using the following commands on the same directory.
@@ -60,7 +62,7 @@ We will create the file "Gruntfile.js" since this project uses Grunt to execute 
 
 **File: ./Gruntfile.js**
 
-~~~
+```js
 module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -68,7 +70,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json')
   });
 };
-~~~
+```
 
 With this we have our project ready to work with "grunt-contrib-processpy".
 

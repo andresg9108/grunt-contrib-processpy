@@ -203,8 +203,6 @@ Also it is recommended to add the extension "Livereload" for "Google Chrome" or 
 - [Extension for Google Chrome.](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=es "Extension for Google Chrome.")
 - [Extension for Mozilla Firefox.](https://addons.mozilla.org/es/firefox/addon/livereload-web-extension "Extension for Mozilla Firefox.")
 
-***THE DOCUMENTATION IS BEING REVIEWED FROM HERE***
-
 ## The process sql <span name="TheProcessSql"></span> ##
 
 This command allows you to take all the ".sql" files in a folder and convert them into one file.
@@ -213,7 +211,19 @@ It is important to understand how the process sql of processpy  works to underst
 
 [Documentation of the sql process](https://github.com/andresg9108/processpy#TheProcessSql "Documentation of the sql process")
 
-We will start by modifying the file "Gruntfile.js" adding the following lines that create a task called "processpy" that contains a task called "sql", it receives an array containing json objects with the parameter "file" which is the final file that it contains all the lines of the other files and the "folder" which is the path of the ".sql" files.
+We will start by modifying the "package.json" file changing all the content of the "scripts" as shown below. This will allow us to access these scripts from the console.
+
+**File: ./package.json**
+
+```js
+...
+"scripts": {
+  "sql": "grunt process-sql"
+},
+...
+```
+
+We will also modify the file "Gruntfile.js" by adding the following lines that create a task called "processpy" that contains a task called "sql", it receives an array containing json objects with the parameter "file", which is the file that It contains all the lines of the other files and the "folder" which is the path of the ".sql" files.
 
 ~~~
 ...
@@ -250,7 +260,7 @@ module.exports = function(grunt) {
 Running the following command is equivalent to running processpy command #2.
 
 ~~~
-grunt process-sql
+npm run sql
 ~~~
 
 ## Replace text string <span name="ReplaceTextString"></span> ##
@@ -261,7 +271,19 @@ It is important to understand how the "replace text string" of processpy  works 
 
 [Documentation of replace text string](https://github.com/andresg9108/processpy#ReplaceTextString "Documentation of replace text string")
 
-We will start modifying the file "Gruntfile.js" adding the following lines that create a task called "processpy" that contains a task called "rts", it receives an array that contains json objects with the parameter "folder" which is the directory that contains the files that we want to modify, "search" which is the text string we want to modify and "replace" which is the new text string that will be added where the previous one was.
+We will start by modifying the "package.json" file changing all the content of the "scripts" as shown below. This will allow us to access these scripts from the console.
+
+**File: ./package.json**
+
+```js
+...
+"scripts": {
+  "rts": "grunt process-rts"
+},
+...
+```
+
+We will also modify the file "Gruntfile.js" by adding the following lines that create a task called "processpy" that contains a task called "rts", it receives an array that contains json objects with the parameter "folder" which is the directory that contains the files that we want to modify, "search" which is the text string we want to modify and "replace" which is the new text string that will be added where the previous one was.
 
 ~~~
 ...
@@ -300,5 +322,5 @@ module.exports = function(grunt) {
 Running the following command is equivalent to running processpy command #3.
 
 ~~~
-grunt process-rts
+npm run rts
 ~~~

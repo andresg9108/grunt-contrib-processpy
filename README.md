@@ -34,7 +34,7 @@ Now we will modify the "package.json" file by changing all the content of the "s
 
 **File: ./package.json**
 
-```json
+```js
 ...
 "scripts": {
   "start": "grunt",
@@ -74,28 +74,26 @@ module.exports = function(grunt) {
 
 With this we have our project ready to work with "grunt-contrib-processpy".
 
-***THE DOCUMENTATION IS BEING REVIEWED FROM HERE***
-
 ## The process html <span name="TheProcessHtml"></span> ##
 
 This command will allow you to create HTML files from others files.
 
 We will start by modifying the "Gruntfile.js" file adding the following lines that create an array called "aRoutePy" that will contain the routes of the pages of our project.
 
-~~~
+```js
 ...
 var aRoutePy = [
   './pages/*',
   './pageTemplates/*'
 ];
 ...
-~~~
+```
 
 So our "Gruntfile.js" file would look like this.
 
 **File: ./Gruntfile.js**
 
-~~~
+```js
 module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -108,11 +106,11 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json')
   });
 };
-~~~
+```
 
 We will also add a new task called "watch" that will contain the tasks that will be executed automatically as "task_py" and that includes the previously created arrangement, this will be done with the following lines.
 
-~~~
+```js
 ...
 watch: {
   files: ['*.*'],
@@ -129,21 +127,21 @@ watch: {
   }
 }
 ...
-~~~
+```
 
 And we will also add the default grunt task using the following line.
 
-~~~
+```js
 ...
 grunt.registerTask('default', ['watch']);
 ...
-~~~
+```
 
 So our "Gruntfile.js" file would look like this.
 
 **File: ./Gruntfile.js**
 
-~~~
+```js
 module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -172,12 +170,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['watch']);
 };
-~~~
+```
 
 Running the following command is equivalent to running processpy command #1. If you don't know what this command does, go to the following link that explains the html process of processpy very well.
 
 ~~~
-grunt process-html
+npm run html
 ~~~
 
 [Documentation of the html process](https://github.com/andresg9108/processpy/#TheProcessHtml "Documentation of the html process")
@@ -185,12 +183,12 @@ grunt process-html
 You can execute this command to update the production files manually, but one of the advantages of this project is that you can execute the following command so that every time a modification is detected in the routes that we put in the "aRoutePy" array, this executes the above command automatically.
 
 ~~~
-grunt
+npm start
 ~~~
 
 It is important to remember that every time we add a new page within the "pages" directory we must also add this path in the "aRoutePy" array. In this way, if we want to add a new page called "page2" the array "aRoutePy" would look like this.
 
-~~~
+```js
 ...
 var aRoutePy = [
   './pages/*',
@@ -198,12 +196,14 @@ var aRoutePy = [
   './pages/page2/*'
 ];
 ...
-~~~
+```
 
-Also it is recommended to add the extension "Livereload" for "Google Chrome" or "Mozilla Firefox". This will tell these browsers to refresh the page the moment they detect a change, but always remember to run the "grunt" command and activate "Livereload" in your browser.
+Also it is recommended to add the extension "Livereload" for "Google Chrome" or "Mozilla Firefox". This will tell these browsers to refresh the page the moment they detect a change, but always remember to run the "npm start" command and activate "Livereload" in your browser.
 
 - [Extension for Google Chrome.](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=es "Extension for Google Chrome.")
 - [Extension for Mozilla Firefox.](https://addons.mozilla.org/es/firefox/addon/livereload-web-extension "Extension for Mozilla Firefox.")
+
+***THE DOCUMENTATION IS BEING REVIEWED FROM HERE***
 
 ## The process sql <span name="TheProcessSql"></span> ##
 

@@ -22,8 +22,6 @@ This project is Processpy's contribution to Grunt. Processpy aims to automate re
 - Node.js (https://nodejs.org).
 - Python (https://www.python.org): Download Python and add it to the path of your operating system.
 
-***THE DOCUMENTATION IS BEING REVIEWED FROM HERE***
-
 ## Getting started <span name="GettingStarted"></span> ##
 
 We will start by executing the following command using the console of your operating system and on the folder that we want to use for our project, this creates a "package.json" file asking for information such as the name of the project, etc, etc.
@@ -31,6 +29,17 @@ We will start by executing the following command using the console of your opera
 ~~~
 npm init
 ~~~
+
+Now we will modify the "package.json" file by changing all the content of the "scripts" as shown below.
+
+**File: ./package.json**
+
+```js
+"scripts": {
+  "start": "grunt",
+  "html": "grunt process-html"
+},
+```
 
 We will also add the following dependencies using the following commands on the same directory.
 
@@ -47,7 +56,7 @@ Or you can also use the following command which installs all these dependencies.
 npm i grunt matchdep grunt-contrib-watch grunt-contrib-processpy --save-dev
 ~~~
 
-We must also create the file "Gruntfile.js" on the same directory that will contain the following lines.
+We will create the file "Gruntfile.js" since this project uses Grunt to execute its processes. This file contains the following lines.
 
 **File: ./Gruntfile.js**
 
@@ -62,6 +71,8 @@ module.exports = function(grunt) {
 ~~~
 
 With this we have our project ready to work with "grunt-contrib-processpy".
+
+***THE DOCUMENTATION IS BEING REVIEWED FROM HERE***
 
 ## The process html <span name="TheProcessHtml"></span> ##
 
@@ -118,7 +129,7 @@ watch: {
 ...
 ~~~
 
-And finally we will add the default grunt task using the following line.
+And we will also add the default grunt task using the following line.
 
 ~~~
 ...

@@ -30,19 +30,6 @@ We will start by executing the following command using the console of your opera
 npm init
 ~~~
 
-Now we will modify the "package.json" file by changing all the content of the "scripts" as shown below.
-
-**File: ./package.json**
-
-```js
-...
-"scripts": {
-  "start": "grunt",
-  "html": "grunt process-html"
-},
-...
-```
-
 We will also add the following dependencies using the following commands on the same directory.
 
 ~~~
@@ -78,7 +65,20 @@ With this we have our project ready to work with "grunt-contrib-processpy".
 
 This command will allow you to create HTML files from others files.
 
-We will start by modifying the "Gruntfile.js" file adding the following lines that create an array called "aRoutePy" that will contain the routes of the pages of our project.
+We will start by modifying the "package.json" file changing all the content of the "scripts" as shown below. This will allow us to access these scripts from the console.
+
+**File: ./package.json**
+
+```js
+...
+"scripts": {
+  "start": "grunt",
+  "html": "grunt process-html"
+},
+...
+```
+
+We will also modify the file "Gruntfile.js" adding the following lines that create an array called "aRoutePy" that will contain the paths of the pages of our project.
 
 ```js
 ...

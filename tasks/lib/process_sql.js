@@ -6,10 +6,10 @@ module.exports.init = function(grunt){
 			var oSQL = aSQL[i];
 			var sFile = oSQL.file;
 			var sFolder = oSQL.folder;
-			
+
 			var command, process, exec;
-		 
-			command = "python node_modules/processpy/process.py -sql "+sFile+" "+sFolder;
+
+			command = `python node_modules/processpy/process.py -sql ${sFile} ${sFolder}`;
 			grunt.log.writeln('Run: ' + command);
 			exec = require('child_process').exec;
 			process = exec(command, function (error, stdout, stderr) {

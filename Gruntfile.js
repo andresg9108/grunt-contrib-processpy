@@ -1,11 +1,21 @@
 'use strict';
 
 module.exports = function(grunt) {
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+	grunt.loadTasks('tasks');
 
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json')
-  });
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
 
-  grunt.loadTasks('tasks');
+		processpy: {
+			sql: [{
+				file: './example/sql/myfile.sql', 
+				folder: './example/sql/files'
+			}],
+			rts: [{
+				folder: './example/rts',
+				search: 'Old string',
+				replace: 'New string'
+			}]
+		}
+	});
 };

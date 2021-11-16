@@ -7,10 +7,10 @@ module.exports.init = function(grunt){
 			var sFolder = oRts.folder;
 			var sSearch = oRts.search;
 			var sReplace = oRts.replace;
-			
+
 			var command, process, exec;
-		 
-			command = 'python node_modules/processpy/process.py -rts "'+sFolder+'" "'+sSearch+'" "'+sReplace+'"';
+
+			command = `python node_modules/processpy/process.py -rts ${sFolder} "${sSearch}" "${sReplace}"`;
 			grunt.log.writeln('Run: ' + command);
 			exec = require('child_process').exec;
 			process = exec(command, function (error, stdout, stderr) {

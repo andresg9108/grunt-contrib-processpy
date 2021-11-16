@@ -1,8 +1,10 @@
 {
   "name": "grunt-contrib-processpy",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "description": "This project is Processpy's contribution to Grunt. Processpy aims to automate repetitive processes or patterns using the great Python programming language.",
   "scripts": {
+    "start": "npm run html",
+    "test": "grunt process-test",
     "html": "grunt process-html",
     "sql": "grunt process-sql",
     "rts": "grunt process-rts"
@@ -11,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/andresg9108/grunt-contrib-processpy.git"
   },
-  "author": "Andres Gonzalez",
+  "author": "Andrés González",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/andresg9108/grunt-contrib-processpy/issues"
@@ -19,6 +21,6 @@
   "homepage": "https://github.com/andresg9108/grunt-contrib-processpy#readme",
   "dependencies": {
     "grunt": "^1.4.1",
-    "processpy": "^0.4.0"
+    "processpy": "^1.0.0"
   }
 }

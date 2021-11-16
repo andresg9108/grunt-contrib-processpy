@@ -225,7 +225,7 @@ We will start by modifying the "package.json" file changing all the content of t
 
 We will also modify the file "Gruntfile.js" by adding the following lines that create a task called "processpy" that contains a task called "sql", it receives an array containing json objects with the parameter "file", which is the file that It contains all the lines of the other files and the "folder" which is the path of the ".sql" files.
 
-~~~
+```js
 ...
 processpy: {
   sql: [{
@@ -234,13 +234,13 @@ processpy: {
   }]
 }
 ...
-~~~
+```
 
 So our "Gruntfile.js" file would look like this.
 
 **File: ./Gruntfile.js**
 
-~~~
+```js
 module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -255,7 +255,7 @@ module.exports = function(grunt) {
     }
   });
 };
-~~~
+```
 
 Running the following command is equivalent to running processpy command #2.
 
@@ -285,7 +285,7 @@ We will start by modifying the "package.json" file changing all the content of t
 
 We will also modify the file "Gruntfile.js" by adding the following lines that create a task called "processpy" that contains a task called "rts", it receives an array that contains json objects with the parameter "folder" which is the directory that contains the files that we want to modify, "search" which is the text string we want to modify and "replace" which is the new text string that will be added where the previous one was.
 
-~~~
+```js
 ...
 processpy: {
   rts: [{
@@ -295,13 +295,13 @@ processpy: {
   }]
 }
 ...
-~~~
+```
 
 So our "Gruntfile.js" file would look like this.
 
 **File: ./Gruntfile.js**
 
-~~~
+```js
 module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -317,7 +317,7 @@ module.exports = function(grunt) {
     }
   });
 };
-~~~
+```
 
 Running the following command is equivalent to running processpy command #3.
 
